@@ -1,8 +1,27 @@
 console.log('Greeting 1');
 console.log('Greeting 2');
 console.log('Greeting 3');
-
-
 console.log('Hello World 1');
 console.log('Hello World 2');
 console.log('Hello World 3');
+
+
+const express = require('express');
+const helmet = require('helmet');
+const cors = require('cors');
+const morgan = require('morgan');
+const app = express();
+// Middleware
+app.use(helmet()); // Basic security headers
+app.use(cors());   // Enable CORS
+app.use(morgan('dev')); // HTTP request logging
+// Basic route (for testing the app)
+app.get('/', (req, res) => {
+  res.send('Hello from Express app!');
+});
+// Basic error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.statusCode || 500).send(err.message || 'Something broke!');
+});
+module.exports = app;
