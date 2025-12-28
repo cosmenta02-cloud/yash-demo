@@ -7,8 +7,10 @@ console.log('Hello World 3');
 
 
 const express = require('express');
+const usersRouter = require('./routes/users'); // Import user routes
 const morgan = require('morgan');
 const adminRoutes = require('./routes/admin'); // Import admin routes
+const os = require('os'); // Required for health check
 const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -22,6 +24,7 @@ app.use(morgan('dev')); // HTTP request logging
 // Basic route (for testing the app)
 app.get('/', (req, res) => {
 // New GET route for health check
+app.use('/api/users', usersRouter); // Mount user routes
 app.get('/api/health', (req, res) => {
   const totalThreads = os.cpus().length;
   const osVersion = os.version();
