@@ -7,6 +7,7 @@ console.log('Hello World 3');
 
 
 const express = require('express');
+const os = require('os'); // Import the built-in 'os' module
 const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -17,6 +18,20 @@ app.use(cors());   // Enable CORS
 app.use(morgan('dev')); // HTTP request logging
 // Basic route (for testing the app)
 app.get('/', (req, res) => {
+// New GET route for health check
+app.get('/api/health', (req, res) => {
+  const totalThreads = os.cpus().length;
+  const osVersion = os.version();
+  const response = {
+    totalThreads: totalThreads,
+  };
+  if (os.platform() === 'win32') {
+    response.windowsVersion = osVersion;
+  } else {
+    response.osVersion = osVersion;
+  }
+  res.json(response);
+});
   res.send('Hello from Express app!');
 });
 // Basic error handling middleware
