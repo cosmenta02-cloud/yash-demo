@@ -1,4 +1,4 @@
-console.log('Greeting');
-console.log('Greeting');
-console.log('Greeting');
-console.log('Greeting');
+console.log('Hello world');
+console.log('Hello world');
+console.log('Hello world');
+console.log('Hello world');
