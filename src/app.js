@@ -7,12 +7,15 @@ console.log('Hello World 3');
 
 
 const express = require('express');
-const os = require('os'); // Import the built-in 'os' module
+const morgan = require('morgan');
+const adminRoutes = require('./routes/admin'); // Import admin routes
 const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
 // Middleware
+// Mount admin routes
+app.use('/admin', adminRoutes);
 app.use(helmet()); // Basic security headers
 app.use(cors());   // Enable CORS
 app.use(morgan('dev')); // HTTP request logging
