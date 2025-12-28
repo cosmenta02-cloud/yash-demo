@@ -27,12 +27,29 @@ app.get('/api/health', (req, res) => {
   };
   if (os.platform() === 'win32') {
     response.windowsVersion = osVersion;
+  res.send('Hello from Express app!');
+});
+// New GET route for health check
+app.get('/api/health', (req, res) => {
+  const totalThreads = os.cpus().length;
+  const osVersion = os.version();
+  const response = {
+    totalThreads: totalThreads,
+  };
+  if (os.platform() === 'win32') {
+    response.windowsVersion = osVersion;
   } else {
     response.osVersion = osVersion;
   }
   res.json(response);
 });
-  res.send('Hello from Express app!');
+// New GET route for user data
+app.get('/api/user', (req, res) => {
+  res.json({
+    id: 1,
+    name: 'John Doe',
+    email: 'john.doe@example.com'
+  });
 });
 // Basic error handling middleware
 app.use((err, req, res, next) => {
