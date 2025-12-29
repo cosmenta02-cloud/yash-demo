@@ -19,6 +19,10 @@ const app = express();
 // Mount admin routes
 app.use('/admin', adminRoutes);
 app.use(helmet()); // Basic security headers
+// Add three console.log statements with greeting messages
+console.log('Application initialization complete.');
+console.log('Middleware setup finished.');
+console.log('Routes are now being defined.');
 app.use(cors());   // Enable CORS
 app.use(morgan('dev')); // HTTP request logging
 // Basic route (for testing the app)
